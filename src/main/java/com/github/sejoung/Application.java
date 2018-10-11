@@ -32,7 +32,7 @@ public class Application {
         logger.info( cr.value().toString());
        
     }
-    @KafkaListener(topicPattern="ClickViewData")
+   // @KafkaListener(topicPattern="ClickViewData")
    // @KafkaListener(topicPartitions = { @TopicPartition(topic = "ClickViewData", partitionOffsets = @PartitionOffset(partition = "0", initialOffset = "0")) })
     public void listen(@Payload String payload,
             @Header(KafkaHeaders.RECEIVED_MESSAGE_KEY) String key,
@@ -44,12 +44,15 @@ public class Application {
             logger.info("RECEIVED_MESSAGE_KEY={}, RECEIVED_PARTITION_ID={}, RECEIVED_TOPIC={}, RECEIVED_TIMESTAMP={}", key, partition, topic, ts);
             logger.info("Payload={}",payload);
     }
-   // @KafkaListener(topicPattern="ClickViewData")
+    @KafkaListener(topicPattern="ClickViewData")
    // @KafkaListener(topicPartitions = { @TopicPartition(topic = "ClickViewData", partitionOffsets = @PartitionOffset(partition = "0", initialOffset = "0")) })
     public void listen(List<TestDto> list) {
 
            for(TestDto test: list) {
-               logger.info(test.toString());
+               if("AU".equals(test.getAdGubun())) {
+                   logger.info(test.toString());
+
+               }
            }
     
     }

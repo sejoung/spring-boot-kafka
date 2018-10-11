@@ -1,5 +1,6 @@
 package com.github.sejoung.domain;
 
+import com.fasterxml.jackson.annotation.JsonAlias;
 import com.fasterxml.jackson.annotation.JsonProperty;
 
 import lombok.Getter;
@@ -11,10 +12,10 @@ import lombok.ToString;
 @Getter
 public class TestDto {
 
-    @JsonProperty("PCODE")
+    @JsonAlias({"PCODE", "pCode"})
     private String pcode;
 
-    @JsonProperty("adGubun")
+    @JsonAlias({"adGubun", "gb"})
     private String adGubun;
 
     @JsonProperty("product")
@@ -23,7 +24,7 @@ public class TestDto {
     @JsonProperty("platform")
     private String pltfomTpCode;
 
-    @JsonProperty("userid")
+    @JsonAlias({"userid", "u"})
     private String adverId;
 
     @JsonProperty("viewcnt1")
@@ -37,4 +38,17 @@ public class TestDto {
     
     @JsonProperty("yyyymmdd")
     private String statsDttm;
+    
+    @JsonProperty("className")
+    private String className;
+    
+    @JsonProperty("frameId")
+    private String frameId;
+    
+    @JsonProperty("gender")
+    private String gender;
+    
+    @JsonProperty("age")
+    private String age;
+    
 }
