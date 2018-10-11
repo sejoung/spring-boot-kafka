@@ -11,14 +11,30 @@ import lombok.ToString;
 @Getter
 public class TestDto {
 
-    @JsonProperty("NO")
-    private long no;
-    
     @JsonProperty("PCODE")
     private String pcode;
 
     @JsonProperty("adGubun")
     private String adGubun;
-    
 
+    @JsonProperty("product")
+    private String advrtsPrdtCode;
+
+    @JsonProperty("platform")
+    private String pltfomTpCode;
+
+    @JsonProperty("userid")
+    private String adverId;
+
+    @JsonProperty("viewcnt1")
+    private String totEprsCnt;
+
+    @JsonProperty("viewcnt3")
+    private String parEprsCnt;
+
+    @JsonProperty("dumpType")
+    private String dumpType;
+    
+    @JsonProperty("yyyymmdd")
+    private String statsDttm;
 }

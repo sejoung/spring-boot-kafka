@@ -8,8 +8,6 @@ import org.slf4j.LoggerFactory;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.kafka.annotation.KafkaListener;
-import org.springframework.kafka.annotation.PartitionOffset;
-import org.springframework.kafka.annotation.TopicPartition;
 import org.springframework.kafka.support.KafkaHeaders;
 import org.springframework.messaging.handler.annotation.Header;
 import org.springframework.messaging.handler.annotation.Payload;
@@ -34,9 +32,9 @@ public class Application {
         logger.info( cr.value().toString());
        
     }
-    
+    @KafkaListener(topicPattern="ClickViewData")
    // @KafkaListener(topicPartitions = { @TopicPartition(topic = "ClickViewData", partitionOffsets = @PartitionOffset(partition = "0", initialOffset = "0")) })
-    public void listen(@Payload TestDto payload,
+    public void listen(@Payload String payload,
             @Header(KafkaHeaders.RECEIVED_MESSAGE_KEY) String key,
             @Header(KafkaHeaders.RECEIVED_PARTITION_ID) int partition,
             @Header(KafkaHeaders.RECEIVED_TOPIC) String topic,
@@ -46,7 +44,7 @@ public class Application {
             logger.info("RECEIVED_MESSAGE_KEY={}, RECEIVED_PARTITION_ID={}, RECEIVED_TOPIC={}, RECEIVED_TIMESTAMP={}", key, partition, topic, ts);
             logger.info("Payload={}",payload);
     }
-    @KafkaListener(topicPattern="ClickViewData")
+   // @KafkaListener(topicPattern="ClickViewData")
    // @KafkaListener(topicPartitions = { @TopicPartition(topic = "ClickViewData", partitionOffsets = @PartitionOffset(partition = "0", initialOffset = "0")) })
     public void listen(List<TestDto> list) {
 
