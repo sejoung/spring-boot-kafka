@@ -1,5 +1,7 @@
 package com.github.sejoung;
 
+import java.util.List;
+
 import org.apache.kafka.clients.consumer.ConsumerRecord;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -33,7 +35,7 @@ public class Application {
        
     }
     
-    @KafkaListener(topicPartitions = { @TopicPartition(topic = "ClickViewData", partitionOffsets = @PartitionOffset(partition = "0", initialOffset = "0")) })
+   // @KafkaListener(topicPartitions = { @TopicPartition(topic = "ClickViewData", partitionOffsets = @PartitionOffset(partition = "0", initialOffset = "0")) })
     public void listen(@Payload TestDto payload,
             @Header(KafkaHeaders.RECEIVED_MESSAGE_KEY) String key,
             @Header(KafkaHeaders.RECEIVED_PARTITION_ID) int partition,
@@ -43,6 +45,15 @@ public class Application {
         
             logger.info("RECEIVED_MESSAGE_KEY={}, RECEIVED_PARTITION_ID={}, RECEIVED_TOPIC={}, RECEIVED_TIMESTAMP={}", key, partition, topic, ts);
             logger.info("Payload={}",payload);
+    }
+    @KafkaListener(topicPattern="ClickViewData")
+   // @KafkaListener(topicPartitions = { @TopicPartition(topic = "ClickViewData", partitionOffsets = @PartitionOffset(partition = "0", initialOffset = "0")) })
+    public void listen(List<TestDto> list) {
+
+           for(TestDto test: list) {
+               logger.info(test.toString());
+           }
+    
     }
 
 }

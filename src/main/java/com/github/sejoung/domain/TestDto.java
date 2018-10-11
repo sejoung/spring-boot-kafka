@@ -12,7 +12,7 @@ import lombok.ToString;
 public class TestDto {
 
     @JsonProperty("NO")
-    private int no;
+    private long no;
     
     @JsonProperty("PCODE")
     private String pcode;
