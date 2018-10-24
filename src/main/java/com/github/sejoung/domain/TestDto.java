@@ -12,10 +12,10 @@ import lombok.ToString;
 @Getter
 public class TestDto {
 
-    @JsonAlias({"PCODE", "pCode"})
+    @JsonAlias({ "PCODE", "pCode" })
     private String pcode;
 
-    @JsonAlias({"adGubun", "gb"})
+    @JsonAlias({ "adGubun", "gb" })
     private String adGubun;
 
     @JsonProperty("product")
@@ -24,7 +24,7 @@ public class TestDto {
     @JsonProperty("platform")
     private String pltfomTpCode;
 
-    @JsonAlias({"userid", "u"})
+    @JsonAlias({ "userid", "u" })
     private String adverId;
 
     @JsonProperty("viewcnt1")
@@ -35,20 +35,22 @@ public class TestDto {
 
     @JsonProperty("dumpType")
     private String dumpType;
-    
+
     @JsonProperty("yyyymmdd")
     private String statsDttm;
-    
+
     @JsonProperty("className")
     private String className;
-    
+
     @JsonProperty("frameId")
     private String frameId;
-    
+
     @JsonProperty("gender")
     private String gender;
-    
+
     @JsonProperty("age")
     private String age;
-    
+
+    @JsonProperty("type")
+    private String type;
 }
