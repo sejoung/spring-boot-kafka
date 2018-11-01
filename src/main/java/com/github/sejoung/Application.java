@@ -5,6 +5,7 @@ import java.util.List;
 import org.apache.kafka.clients.consumer.ConsumerRecord;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.boot.ApplicationRunner;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.context.annotation.Bean;
@@ -28,13 +29,19 @@ public class Application {
     public static void main(String[] args) {
         SpringApplication.run(Application.class, args);
     }
+    
+    @Bean
+    public ApplicationRunner runner(Producer producer) {
+        return (args) -> producer.send("test");
+    }
 
+    
     //@KafkaListener(topicPartitions = { @TopicPartition(topic = "test", partitionOffsets = @PartitionOffset(partition = "0", initialOffset = "0")) })
     public void listen(ConsumerRecord<?, ?> cr) throws Exception {
         logger.info( cr.value().toString());
        
     }
-   // @KafkaListener(topicPattern="ClickViewData")
+    @KafkaListener(topicPattern="trackingTest")
    // @KafkaListener(topicPartitions = { @TopicPartition(topic = "ClickViewData", partitionOffsets = @PartitionOffset(partition = "0", initialOffset = "0")) })
     public void listen(@Payload String payload,
             @Header(KafkaHeaders.RECEIVED_MESSAGE_KEY) String key,
@@ -51,6 +58,7 @@ public class Application {
     public void listen(List<TestDto> list) {
 
            for(TestDto test: list) {
+
                if("AU".equals(test.getAdGubun())) {
                    logger.info(test.toString());
 
@@ -59,7 +67,7 @@ public class Application {
     
     }
     
-    @KafkaListener(topicPattern="ClickViewData", errorHandler = "voidSendToErrorHandler")
+  //  @KafkaListener(topicPattern="ClickViewData", errorHandler = "voidSendToErrorHandler")
     public void voidListenerWithReplyingErrorHandler(String in) {
         throw new RuntimeException("fail");
     }
