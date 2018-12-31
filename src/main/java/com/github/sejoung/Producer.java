@@ -16,8 +16,12 @@
 
 package com.github.sejoung;
 
+import java.util.concurrent.ExecutionException;
+
 import org.springframework.kafka.core.KafkaTemplate;
+import org.springframework.kafka.support.SendResult;
 import org.springframework.stereotype.Component;
+import org.springframework.util.concurrent.ListenableFuture;
 
 @Component
 public class Producer {
@@ -28,9 +32,11 @@ public class Producer {
 		this.kafkaTemplate = kafkaTemplate;
 	}
 
-	public void send(String message) {
-		this.kafkaTemplate.send("testTopic", message);
-		System.out.println("Sent sample message [" + message + "]");
+	public void send(String message) throws InterruptedException, ExecutionException {
+	    ListenableFuture<SendResult<Object, String>> a = this.kafkaTemplate.send("trackingTest", message);
+	    
+	    
+		System.out.println(a.get().getRecordMetadata());
 	}
 
 }
