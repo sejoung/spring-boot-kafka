@@ -16,7 +16,7 @@ public class KafkaConsumerList {
 
     private String payload;
 
-    @KafkaListener(topics = Constants.TOPIC, groupId = "list", properties = {"listener.type:batch"})
+    @KafkaListener(topics = Constants.TOPIC, groupId = "list")
     public void receive(List<ConsumerRecord<?, ?>> records) {
         log.info("records size='{}'", records.size());
         records.forEach(this::runCountDown);
