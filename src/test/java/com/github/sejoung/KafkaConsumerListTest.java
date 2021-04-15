@@ -31,6 +31,7 @@ class KafkaConsumerListTest {
         }
     }
 
+    //spring.kafka.listener.type=batch
     @Test
     void receiveTest() throws InterruptedException {
         log.info(" count {} ", consumer.getLatch().getCount());
